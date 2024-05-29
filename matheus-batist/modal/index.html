@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal</title>
+
+    <style>
+        .dialog::backdrop { background-color: rgba(0, 0, 0, 0.5);}
+    </style>
+</head>
+<body>
+    <button id="abrir">Abrir</button>
+
+    <dialog id="dialog" class="dialog">
+        <h1>Formulario</h1>
+        <button id="fechar">Fechar</button>
+    </dialog>
+
+    <script>
+        const dialog = document.getElementById('dialog');
+        const abrir = document.getElementById('abrir');
+        const fechar = document.getElementById('fechar');
+
+        abrir.addEventListener('click', (e) => {
+            dialog.showModal();
+        });
+
+        dialog.addEventListener('click', (event) => {
+            const rect = dialog.getBoundingClientRect();
+            if(
+                event.clientX < rect.left ||
+                event.clientX > rect.right ||
+                event.clientY < rect.top ||
+                event.clientY > rect.bottom
+            ) {
+                dialog.close();
+            }
+        });
+    </script>
+</body>
+</html>
